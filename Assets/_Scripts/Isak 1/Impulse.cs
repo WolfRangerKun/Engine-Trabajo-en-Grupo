@@ -10,6 +10,8 @@ public class Impulse : MonoBehaviour
     {
         if (other.CompareTag("Player") && canJump)
         {
+            other.GetComponent<Rigidbody>().isKinematic = true;
+            other.GetComponent<Rigidbody>().isKinematic = false;
 
             other.GetComponent<Rigidbody>().AddForce(transform.forward * impulse /3*2 * Time.deltaTime, ForceMode.Impulse);
             other.GetComponent<Rigidbody>().AddForce(Vector3.up * impulse * 5f * Time.deltaTime, ForceMode.Impulse);
@@ -26,4 +28,6 @@ public class Impulse : MonoBehaviour
         canJump = false;
         yield break;
     }
+
+
 }

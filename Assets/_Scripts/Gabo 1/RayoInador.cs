@@ -16,11 +16,11 @@ public class RayoInador : MonoBehaviour
     public CambioDeEfectos cambioDeEfectos;
     void Update()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.R))
         {
             RayEffect();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if(cambioDeEfectos >= 0)
             {
@@ -38,7 +38,7 @@ public class RayoInador : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(originRay.position, transform.forward, Color.green, distanceRay);
         Physics.Raycast(originRay.position, transform.forward, out hit, distanceRay);
-        if (hit.collider)
+        if (hit.collider.tag == "Object")
         {
             ChangePropierties(hit.collider.gameObject);
         }
@@ -57,11 +57,11 @@ public class RayoInador : MonoBehaviour
                 break;
             case CambioDeEfectos.AGRANDAR:
                 affect.transform.localScale += new Vector3(scaleValue * Time.deltaTime, scaleValue * Time.deltaTime, scaleValue * Time.deltaTime);
-                affect.GetComponent<MeshRenderer>().material.color = Color.black;
+                affect.GetComponent<MeshRenderer>().material.color = Color.magenta;
                 break;
             case CambioDeEfectos.ACHICAR:
                 affect.transform.localScale -= new Vector3(scaleValue * Time.deltaTime, scaleValue * Time.deltaTime, scaleValue * Time.deltaTime);
-                affect.GetComponent<MeshRenderer>().material.color = Color.white;
+                affect.GetComponent<MeshRenderer>().material.color = Color.yellow;
                 break;
         }
     }

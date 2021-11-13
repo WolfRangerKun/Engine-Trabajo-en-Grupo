@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Grab : MonoBehaviour
 {
-    private bool isGrabbed;
+    public bool isGrabbed;
     private bool canPressQ;
+
     public HingeJoint hJoint;
     public GameObject player;
-
+    public GameObject gameobjectRb;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -34,13 +39,15 @@ public class Grab : MonoBehaviour
             {
                 other.GetComponent<PlayerMovement>().canMove = false;
                 hJoint.connectedBody = other.GetComponent<Rigidbody>();
-                other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
                 Debug.Log("agarrado");
             }
             else
             {
                 other.GetComponent<PlayerMovement>().canMove = true;
-                hJoint.connectedBody = null;
+                other.GetComponent<Rigidbody>().AddForce(Vector3.zero, ForceMode.Impulse);
+                hJoint.connectedBody = gameobjectRb.GetComponent<Rigidbody>();
+                other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 Debug.Log("soltado");
             }
@@ -51,21 +58,29 @@ public class Grab : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && !isGrabbed)
+        {
+            canPressQ = false;
+        }
+    }
+
     private void Update()
     {
 
-            if (canPressQ && Input.GetKeyDown(KeyCode.Q))
+            if (canPressQ && Input.GetKeyDown(KeyCode.Mouse0) )
             {
                 ApretarQ();
             }
         if (canPressQ && isGrabbed)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.A))
             {
                 player.GetComponent<Rigidbody>().AddForce(Vector3.left, ForceMode.Impulse);
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.D))
             {
                 player.GetComponent<Rigidbody>().AddForce(Vector3.right, ForceMode.Impulse);
             }
@@ -76,4 +91,6 @@ public class Grab : MonoBehaviour
         isGrabbed = !isGrabbed;
         
     }
+
+
 }

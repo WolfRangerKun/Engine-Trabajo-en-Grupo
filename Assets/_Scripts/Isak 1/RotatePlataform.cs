@@ -28,7 +28,7 @@ public class RotatePlataform : MonoBehaviour
 
         Vector3 direction = mouseOnScreen - positionOnScreen;
 
-        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f) + saveRotation.y;
+        float angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 180f) + saveRotation.y;
 
 
         toRotate.rotation = Quaternion.Euler(new Vector3(0, -angle, 0));

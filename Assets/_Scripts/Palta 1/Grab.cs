@@ -10,8 +10,12 @@ public class Grab : MonoBehaviour
     public HingeJoint hJoint;
     public GameObject player;
     public GameObject gameobjectRb;
+
+    public AudioSource auSource;
+    public AudioClip agarar, soltar;
     private void Start()
     {
+        auSource = GetComponent<AudioSource>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
     private void OnTriggerStay(Collider other)
@@ -41,6 +45,7 @@ public class Grab : MonoBehaviour
                 hJoint.connectedBody = other.GetComponent<Rigidbody>();
                 other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
                 Debug.Log("agarrado");
+               
             }
             else
             {
@@ -50,6 +55,7 @@ public class Grab : MonoBehaviour
                 other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 Debug.Log("soltado");
+                
             }
             //if (canPressQ && Input.GetKeyDown(KeyCode.Q))
             //{
@@ -89,6 +95,16 @@ public class Grab : MonoBehaviour
     public void ApretarQ()
     {
         isGrabbed = !isGrabbed;
+        if (isGrabbed)
+        {
+            auSource.clip = agarar;
+            auSource.Play();
+        }
+        else
+        {
+            auSource.clip = soltar;
+            auSource.Play();
+        }
         
     }
 

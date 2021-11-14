@@ -48,11 +48,11 @@ public class RayoInador : MonoBehaviour
         switch (cambioDeEfectos)
         {
             case CambioDeEfectos.MASPESO:
-                affect.GetComponent<Rigidbody>().mass += massValue * Time.deltaTime;
+                affect.GetComponent<Rigidbody>().mass = 30;
                 affect.GetComponent<MeshRenderer>().material.color = Color.red;
                 break;
             case CambioDeEfectos.MENOSPESO:
-                affect.GetComponent<Rigidbody>().mass -= massValue * Time.deltaTime;
+                affect.GetComponent<Rigidbody>().mass = 1;
                 affect.GetComponent<MeshRenderer>().material.color = Color.blue;
                 break;
             case CambioDeEfectos.AGRANDAR:

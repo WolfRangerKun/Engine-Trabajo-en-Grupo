@@ -9,10 +9,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public float jumpForce;
     public LayerMask ground;
+    public Camera cameraMain;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        cameraMain = Camera.main;
         intance = this;
     }
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Vertical");
 
         playerInput = new Vector3(z, 0, x);
+        //playerInput = cam.forward * playerInput.z + cam.right * playerInput.x;
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
 
         if (playerInput.magnitude >= .1f && canMove)

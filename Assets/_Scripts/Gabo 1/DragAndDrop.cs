@@ -7,16 +7,13 @@ public class DragAndDrop : MonoBehaviour
     public GameObject handPoint;
 
     GameObject pickedObject = null;
-    void Start()
-    {
-
-    }
 
     void Update()
     {
         if (pickedObject != null)
         {
             pickedObject.GetComponent<Rigidbody>().useGravity = true;
+            pickedObject.GetComponent<Rigidbody>().isKinematic = false;
             pickedObject.gameObject.transform.SetParent(null);
             pickedObject = null;
         }
@@ -29,6 +26,7 @@ public class DragAndDrop : MonoBehaviour
             if(Input.GetKey(KeyCode.E) && pickedObject == null)
             {
                 other.GetComponent<Rigidbody>().useGravity = false;
+                other.GetComponent<Rigidbody>().isKinematic = true;
                 other.transform.position = handPoint.transform.position;
                 other.gameObject.transform.SetParent(handPoint.gameObject.transform);
                 pickedObject = other.gameObject;

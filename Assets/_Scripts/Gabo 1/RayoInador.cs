@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 public class RayoInador : MonoBehaviour
 {
     public float distanceRay, scaleValue, massValue;
     public Transform originRay;
+    public LayerMask boxs;
+    public TMP_Text status;
     public enum CambioDeEfectos
     {
         MASPESO,
@@ -16,6 +20,7 @@ public class RayoInador : MonoBehaviour
     public CambioDeEfectos cambioDeEfectos;
     void Update()
     {
+        status.text = "Efecto: " + cambioDeEfectos.ToString();
         if (Input.GetKey(KeyCode.R))
         {
             RayEffect();
@@ -37,8 +42,8 @@ public class RayoInador : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawRay(originRay.position, transform.forward, Color.green, distanceRay);
-        Physics.Raycast(originRay.position, transform.forward, out hit, distanceRay);
-        if (hit.collider.tag == "Object")
+        Physics.Raycast(originRay.position, transform.forward, out hit, distanceRay, boxs);
+        if (hit.collider)
         {
             ChangePropierties(hit.collider.gameObject);
         }

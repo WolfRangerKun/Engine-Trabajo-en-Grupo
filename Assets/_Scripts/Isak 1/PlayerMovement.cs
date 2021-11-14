@@ -9,12 +9,10 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public float jumpForce;
     public LayerMask ground;
-    public Camera cameraMain;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        cameraMain = Camera.main;
         intance = this;
     }
 
@@ -33,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Vertical");
 
         playerInput = new Vector3(z, 0, x);
-        //playerInput = cam.forward * playerInput.z + cam.right * playerInput.x;
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
 
         if (playerInput.magnitude >= .1f && canMove)
@@ -49,9 +46,9 @@ public class PlayerMovement : MonoBehaviour
             rb.MovePosition(transform.position + moveDir * speed * Time.deltaTime);
         }
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 5, ground))
+        if (Physics.Raycast(transform.position + new Vector3(0,1,0), -Vector3.up, out hit, 2, ground))
         {
-            Debug.DrawRay(transform.position, -Vector3.up, Color.red, 7);
+            Debug.DrawRay(transform.position + new Vector3(0, 0.1f, 0), -Vector3.up, Color.red, 7);
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);

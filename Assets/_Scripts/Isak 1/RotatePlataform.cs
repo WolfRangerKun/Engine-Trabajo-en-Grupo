@@ -7,7 +7,7 @@ public class RotatePlataform : MonoBehaviour
     public bool canMove;
     public Transform toRotate;
     Quaternion saveRotation;
-   
+    public AudioSource dragSfx;
 
     private void OnMouseDrag()
     {
@@ -15,6 +15,11 @@ public class RotatePlataform : MonoBehaviour
         {
             Rotation();
         }
+    }
+
+    private void OnMouseDown()
+    {
+        dragSfx.Play();
     }
     public void ChangeStatus()
     {

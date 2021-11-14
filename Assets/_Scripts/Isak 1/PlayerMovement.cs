@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement intance;
     public float speed = 20;
     Rigidbody rb;
-
+    public float jumpForce;
+    public LayerMask ground;
 
     private void Awake()
     {
@@ -44,6 +45,16 @@ public class PlayerMovement : MonoBehaviour
 
             rb.MovePosition(transform.position + moveDir * speed * Time.deltaTime);
         }
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, 5, ground))
+        {
+            Debug.DrawRay(transform.position, -Vector3.up, Color.red, 7);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            }
+        }
+
 
     }
 }

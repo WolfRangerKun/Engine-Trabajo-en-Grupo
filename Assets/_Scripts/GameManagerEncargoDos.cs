@@ -18,6 +18,8 @@ public class GameManagerEncargoDos : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
+        gameRunning = true;
+        Time.timeScale = 1f;
     }
     void Update()
     {

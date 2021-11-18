@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public float jumpForce;
     public LayerMask ground;
-
+    public bool ejeZ = true;
+    public float z;
+    public float x;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,8 +29,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float z = Input.GetAxis("Horizontal");
-        float x = Input.GetAxis("Vertical");
+        
+        z = Input.GetAxis("Horizontal");
+        if (ejeZ)
+        {
+            x = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            x = 0;
+        }
+        
+
 
         playerInput = new Vector3(z, 0, x);
         playerInput = Vector3.ClampMagnitude(playerInput, 1);
@@ -55,4 +67,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public void ejeZFalse()
+    {
+        ejeZ = false;
+    }
+    
 }

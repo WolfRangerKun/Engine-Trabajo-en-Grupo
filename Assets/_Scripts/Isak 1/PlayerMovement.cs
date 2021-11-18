@@ -54,7 +54,5 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             }
         }
-
-
     }
 }

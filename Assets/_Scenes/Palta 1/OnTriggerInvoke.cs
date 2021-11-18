@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OnTriggerInvoke : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public UnityEvent ontriggerEnter, ontriggerExit;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            ontriggerEnter?.Invoke();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            ontriggerExit?.Invoke();
+        }
     }
 }

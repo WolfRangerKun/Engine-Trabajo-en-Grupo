@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
 
         //text.text = mastervo.ToString();
 
-        audioMixer.SetFloat("masterVol", Mathf.Log10(sliders[0].value) * 20);
+        audioMixer.SetFloat("MasterVol", Mathf.Log10(sliders[0].value) * 20);
         audioMixer.SetFloat("BGMVol", Mathf.Log10(sliders[1].value) * 20);
         audioMixer.SetFloat("SFXVol", Mathf.Log10(sliders[2].value) * 20);
 

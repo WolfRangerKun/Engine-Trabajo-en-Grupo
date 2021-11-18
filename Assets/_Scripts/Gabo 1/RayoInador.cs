@@ -28,11 +28,11 @@ public class RayoInador : MonoBehaviour
     void Update()
     {
         status.text = "Efecto: " + cambioDeEfectos.ToString();
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             RayEffect();
         }
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.Mouse1))
             sfx = true;
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -62,8 +62,10 @@ public class RayoInador : MonoBehaviour
         switch (cambioDeEfectos)
         {
             case CambioDeEfectos.MASPESO:
-                affect.GetComponent<Rigidbody>().mass = 30;
+                affect.GetComponent<Rigidbody>().mass = 100;
                 affect.GetComponent<MeshRenderer>().material.color = Color.red;
+                affect.GetComponent<Rigidbody>().useGravity = false;
+                affect.GetComponent<Rigidbody>().isKinematic = true;
                 if (sfx)
                 {
                     sonidosAudios[0].Play();
@@ -73,6 +75,8 @@ public class RayoInador : MonoBehaviour
             case CambioDeEfectos.MENOSPESO:
                 affect.GetComponent<Rigidbody>().mass = 1;
                 affect.GetComponent<MeshRenderer>().material.color = Color.blue;
+                affect.GetComponent<Rigidbody>().useGravity = true;
+                affect.GetComponent<Rigidbody>().isKinematic = false;
                 if (sfx)
                 {
                     sonidosAudios[1].Play();

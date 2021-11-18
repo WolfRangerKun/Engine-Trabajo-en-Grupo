@@ -10,7 +10,7 @@ public class DragAndDrop : MonoBehaviour
 
     void Update()
     {
-        if (pickedObject != null)
+        if (pickedObject != null && !Input.GetKey(KeyCode.Mouse0))
         {
             pickedObject.GetComponent<Rigidbody>().useGravity = true;
             pickedObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -23,7 +23,7 @@ public class DragAndDrop : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Object"))
         {
-            if(Input.GetKey(KeyCode.E) && pickedObject == null)
+            if(Input.GetKey(KeyCode.Mouse0) && pickedObject == null)
             {
                 other.GetComponent<Rigidbody>().useGravity = false;
                 other.GetComponent<Rigidbody>().isKinematic = true;

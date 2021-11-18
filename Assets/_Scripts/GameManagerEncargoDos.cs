@@ -63,6 +63,21 @@ public class GameManagerEncargoDos : MonoBehaviour
     {
         return gameRunning;
     }
+    bool mouseState;
+    public void MouseState()
+    {
+        mouseState = !mouseState;
+        if (mouseState)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+        }
 
+    }
 
 }
